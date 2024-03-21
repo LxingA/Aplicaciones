@@ -7,7 +7,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://portal.codeink.mx/self/code/apps.git"
+    "url": "https://github.com/LxingA/Aplicaciones.git"
   },
   "main": "./mobile.ts",
   "scripts": {
@@ -37,10 +37,10 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://portal.codeink.mx/self/code/apps/issues",
+    "url": "https://github.com/LxingA/Aplicaciones/issues",
     "email": "contacto@socasf.net"
   },
-  "homepage": "https://portal.codeink.mx/self/code/apps",
+  "homepage": "https://github.com/LxingA/Aplicaciones",
   "dependencies": {
     "@apollo/client": "^3.9.6",
     "@material-design-icons/font": "^0.14.13",
