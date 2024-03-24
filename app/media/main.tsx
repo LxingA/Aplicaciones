@@ -1,7 +1,7 @@
 /*
 @author LxingA
 @project CodeInk Apps
-@name SocASF Anime [anime]
+@name SocASF Media
 @date 14/03/24 10:00PM
 @description Inicialización de la Aplicación
 */

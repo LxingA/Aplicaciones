@@ -1,14 +1,13 @@
 /*
 @author LxingA
 @project CodeInk Apps
-@name SocASF Anime [anime]
+@name SocASF Media
 @date 16/03/24 01:30AM
 @description Componentes Esenciales para el Píe de Página de la Aplicación
 */
 import {useSelector} from 'react-redux';
 import {Link,useLocation} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {$AddonComponentButtonDarkModeSelector$} from './header.web';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import type {Root} from '../../../bin/redux';
 import $Asset$ from '../../../util/asset';
@@ -32,9 +31,6 @@ export default function Footer(){
                             policy
                         </span>
                     </button>
-                </li>
-                <li className="nav-item">
-                    <$AddonComponentButtonDarkModeSelector$ current={dark}/>
                 </li>
             </ul>
         </footer>

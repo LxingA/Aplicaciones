@@ -1,7 +1,7 @@
 /*
 @author LxingA
 @project CodeInk Apps
-@name SocASF Anime [anime]
+@name SocASF Media
 @date 15/03/24 06:00PM
 @description Página Principal de la Aplicación
 */
@@ -56,6 +56,15 @@ const $Default$ = ({endpoint,project,callback}:{
     );
 };
 
+/** Componente para Mostrar las Estrellas de Calificación */
+export const $Star_Icon_Component$ = () => {
+    return (
+        <span className="material-icons-outlined md-18">
+            star
+        </span>
+    );
+};
+
 /** Vista para la Visualización de la Multimedia en General para la Página Principal de la Aplicación */
 const $SeeView$ = ({project}:{
     /** Objeto con la Información del Proyecto Asociada al Servicio */
@@ -80,20 +89,14 @@ const $SeeView$ = ({project}:{
     }) => {
         const {search} = useLocation();
         /** Definición del Componente para Mostrar la Estrella */
-        const $Star_Icon_Component$ = () => {
-            return (
-                <span className="material-icons-outlined md-18">
-                    star
-                </span>
-            );
-        };return (
+        return (
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 align-items-stretch">
                 {container["map"](({title,rate,description,href},$iterator$) => {
                     let $Component_Stars_Container$: JSX.Element[] = [];
                     for(let $o = 0; $o <= (rate - 1); $o++) $Component_Stars_Container$["push"](<$Star_Icon_Component$ key={$o}/>);
                     return (
                         <div className="col g-4" key={$iterator$}>
-                            <div style={{backdropFilter:"blur(8px)",height:"600px",backgroundImage:`url(${$Asset$(`cover/home_seemode_${href["substring"](1)}_cover.webp`)})`}} className="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg">
+                            <div style={{height:"600px",backgroundImage:`url(${$Asset$(`cover/home_seemode_${href["substring"](1)}_cover.webp`)})`}} className="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg">
                                 <div style={{background:"#231f1f8f"}} className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                                     <h3 className="pt-5 mt-5 mb-4 display-5 lh-1 fw-bold">
                                         {title}

@@ -10,6 +10,7 @@ import $Fetcher$ from './fetch';
 import type {Global as GlobalPrototype} from '../types/reducer';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import type {MediaType,MediaObject} from '../types/service/media';
+import type Pagination from '../types/pagination';
 
 /** Definición del Handler para la Petición a la API Global */
 export const $Initial$ = (createAsyncThunk("api/fetch",(async () => (await $Fetcher$({
@@ -82,11 +83,39 @@ export const $Global$ = (createSlice({
 export const $Media$ = (createSlice({
     name: "media",
     initialState: ({
-        contextView: "unknown"
+        contextView: "unknown",
+        pagination: {
+            perPage: 4,
+            currentPage: 1,
+            total: 0,
+            loader: true
+        },
+        filter: []
     } as MediaObject),
     reducers: {
+        /** Establecer el Tipo de Contexto de la Multimedia en la Aplicación */
         setContext: ($current$,{payload}:PayloadAction<MediaType>) => {
             $current$["contextView"] = payload;
+        },
+        /** Mutar la Paginación del Contexto Actual para la Vista de Lista de la Aplicación */
+        mutatePagination: ($current$,{payload}:PayloadAction<Pagination>) => {
+            $current$["pagination"] = {...$current$["pagination"],...payload};
+        },
+        /** Añadir un Nuevo Filtro en el Contexto de un Medio para el Filtro */
+        setFilter: ($current$,{payload}:PayloadAction<string>) => {
+            const $__clone__$: string[] = payload["split"](":");
+            const $__filter__$: string[] = (payload == "none" ? [] : $current$["filter"]);
+            if(payload != "none") if($__filter__$["length"] == 0) $__filter__$["push"](payload); else for(let $y$: number = 0; $y$ <= ($current$["filter"]["length"] - 1); $y$++){
+                if($current$["filter"][$y$]["startsWith"]($__clone__$[0])){
+                    delete $__filter__$[$y$];
+                    $__filter__$[$y$] = payload;
+                }else if($current$["filter"][$y$] != payload) $__filter__$["push"](payload);
+            }$current$["pagination"] = {...$current$["pagination"],loader:true};
+            $current$["filter"] = $__filter__$;
+        },
+        /** Definir en Contexto de Búsqueda al Ambito de la Aplicación */
+        setSearch: ($current$,{payload}:PayloadAction<string | undefined>) => {
+            $current$["search"] = payload;
         }
     }
 }));

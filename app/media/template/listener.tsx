@@ -1,7 +1,7 @@
 /*
 @author LxingA
 @project CodeInk Apps
-@name SocASF Anime [anime]
+@name SocASF Media
 @date 18/03/24 10:30PM
 @description Plantilla para Mostrar la Vista de Listado de los Medios
 */

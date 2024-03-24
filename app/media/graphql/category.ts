@@ -16,7 +16,8 @@ export default gql`
             children {
                 label,
                 identified
-            }
+            },
+            identified
         }
     }
 `;

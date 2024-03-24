@@ -17,12 +17,7 @@ export default defineConfig({
     ],
     server: {
         port,
-        strictPort: true,
-        hmr: {
-            host: "127.0.0.1",
-            protocol: "wss",
-            port
-        }
+        strictPort: true
     },
     build: {
         outDir: "static"

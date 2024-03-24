@@ -25,7 +25,15 @@
     "PageVideoKeyword": "gameplay,test,music,stories,moba,cover,general",
     "PageListenerHeaderDescriptionText": "Enjoy a variety of <strong>{context}</strong> from different genres that are part of the <strong>{author}</strong> list. I hope you like the content",
     "PageListenerOptionHeaderTitleText": "List of {context}",
+    "PageListenerOptionSearchLabelText": "Search by title...",
+    "PageListenerOptionSearchEnabledContextTextLabel": "Results of \"{search}\"",
     "ComponentListenerFilterContainerTitleText": "Filter",
     "GraphQLErrorUnknownGlobalTitleText": "Unknown Error",
-    "GraphQLErrorUnknownGlobalButtonActionLabel": "Retry"
+    "GraphQLErrorUnknownGlobalButtonActionLabel": "Retry",
+    "ComponentListenerPaginationTextLabelText": "showing {total_on_view} of {total_elements} {context_name} in the view",
+    "ComponentListenerPaginationContextAnimeTitle": "Animes|Anime",
+    "ComponentListenerPaginationContextMusicTitle": "Songs|Song",
+    "ComponentListenerPaginationContextGameTitle": "Games|Game",
+    "ComponentListenerPaginationContextVideoTitle": "Videos|Video",
+    "ComponentListenerNotFoundTitleText": "Nothing Found"
 }
