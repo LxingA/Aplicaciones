@@ -8,7 +8,7 @@
 import {Fragment} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
-import {Link,useLocation} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {$Action$} from '../../../util/reducer';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import type {Root} from '../../../bin/redux';
@@ -58,13 +58,12 @@ export const $AddonComponentButtonDarkModeSelector$ = ({current,style}:{
 /** Definición del Componente Global para la Cabecera de la Aplicación */
 export default function Header(){
     const {dark,option:{languages},name,project} = useSelector(($state$:Root)=>$state$["global"]);
-    const {search} = useLocation();
     return (
         <Fragment>
             <header className="p-3 mb-3">
                 <div className="container">
                     <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <Link to={{pathname:"/",search}} className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+                        <Link to="/" className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
                             <LazyLoadImage style={{position:"relative",right:"6px"}} effect="blur" alt={`${project["alternative"][2]} ${name}`} className="bi me-2" width={48} src={$Asset$(`logo-${dark ? "light" : "dark"}.webp`)}/>
                             <span className="fs-4">
                                 {project["alternative"][2]} {name}

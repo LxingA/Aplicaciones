@@ -93,7 +93,7 @@ export default async() => {
                     ]
                 },
                 {
-                    text: "Aplicaciones Web",
+                    text: "Aplicaciones",
                     items: [
                         {
                             text: "Imprenta Express MTY",
@@ -106,34 +106,12 @@ export default async() => {
                     ]
                 },
                 {
-                    text: "Aplicaciones Móviles",
-                    items: [
-                        {
-                            text: "Próximamente"
-                        }
-                    ]
-                },
-                {
-                    text: "Aplicaciones de Escritorio",
-                    items: [
-                        {
-                            text: "Próximamente"
-                        }
-                    ]
-                },
-                {
                     text: "Videojuegos",
                     items: [
                         {
                             text: "Próximamente"
                         }
                     ]
-                }
-            ],
-            nav: [
-                {
-                    text: "Términos Legales",
-                    link: "/legal"
                 }
             ]
         },
@@ -148,6 +126,5 @@ export default async() => {
         }
     })) as any;
     $["themeConfig"]["endpoint"] = ($global$["endpoint"]);
-
     return (typeof($global$) != "string") && $;
 };

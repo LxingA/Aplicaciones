@@ -124,7 +124,7 @@ const $SeeView$ = ({project}:{
     };
     return (
         <div className="container">
-            <div className="p-4 p-md-5 rounded text-body-emphasis bg-body-secondary" style={{background:`url(${$Asset$("cover/home_seemode_header_cover.webp")})`,backgroundAttachment:"fixed",backgroundPosition:"8% bottom",backgroundSize:"cover",backgroundRepeat:"no-repeat"}}>
+            <div className="p-4 p-md-5 rounded bg-body-secondary" style={{color:"white",background:`url(${$Asset$("cover/home_seemode_header_cover.webp")})`,backgroundAttachment:"fixed",backgroundPosition:"8% bottom",backgroundSize:"cover",backgroundRepeat:"no-repeat"}}>
                 <div className="col-lg-6 px-0">
                     <h1 className="display-4 fst-italic">
                         {t("PageIndexSeeModeHeaderTitle")}

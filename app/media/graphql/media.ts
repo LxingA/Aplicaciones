@@ -7,25 +7,27 @@
 */
 import {gql} from '@apollo/client';
 
+/** Obtención de la Información Completa de un Sólo Elemento */
+export const singleItem = gql`
+    query FullContent($identified:String!,$context:String!){
+        media_content(identified:$identified,context:$context){
+            item {
+                ...MediaContextContentEssentialData
+            }
+        }
+    }
+`;
+
 /** Definición del Prototipo para la Obtención de los Medios de la Aplicación */
 export default gql`
-    query Content($paginator:Pagination,$filter:[String],$context:String!,$search:String){
+    query PartialContent($paginator:Pagination,$filter:[String],$context:String!,$search:String){
         media_content(paginator:$paginator,filter:$filter,context:$context,search:$search){
-            name,
-            description,
-            rate,
-            meta {
-                id,
-                label,
-                item {
-                    label,
-                    identified
-                }
+            item {
+                ...MediaContextContentEssentialData
             },
-            media {
-                cover,
-                background,
-                snapshot
+            total {
+                pages,
+                elements
             }
         }
     }

@@ -28,12 +28,14 @@
     "PageListenerOptionSearchLabelText": "Search by title...",
     "PageListenerOptionSearchEnabledContextTextLabel": "Results of \"{search}\"",
     "ComponentListenerFilterContainerTitleText": "Filter",
+    "ComponentListenerFilterContainerButtonResetLabelText": "Restore",
     "GraphQLErrorUnknownGlobalTitleText": "Unknown Error",
     "GraphQLErrorUnknownGlobalButtonActionLabel": "Retry",
-    "ComponentListenerPaginationTextLabelText": "showing {total_on_view} of {total_elements} {context_name} in the view",
+    "ComponentListenerPaginationTextLabelText": "showing {total_on_view} of {total_elements} {context_name} in total in the view",
     "ComponentListenerPaginationContextAnimeTitle": "Animes|Anime",
     "ComponentListenerPaginationContextMusicTitle": "Songs|Song",
     "ComponentListenerPaginationContextGameTitle": "Games|Game",
     "ComponentListenerPaginationContextVideoTitle": "Videos|Video",
-    "ComponentListenerNotFoundTitleText": "Nothing Found"
+    "ComponentListenerNotFoundTitleText": "Nothing Found",
+    "PageViewSEOTitleDefault": "Previewing {title}"
 }

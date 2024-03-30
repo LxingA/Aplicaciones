@@ -5,7 +5,7 @@
 @date 18/03/24 11:30PM
 @description Definición de los Componentes Esenciales para la Vista de Listado de la Aplicación
 */
-import {useState,useEffect} from 'react';
+import {useState,KeyboardEvent} from 'react';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {useTranslation} from 'react-i18next';
 import {useSelector,useDispatch} from 'react-redux';
@@ -23,13 +23,12 @@ import $Skeleton$ from 'react-loading-skeleton';
 
 /** Definición del Componente Global para Mostrar el Contenedor de No Encontrado de GraphQL */
 export const $ComponentListenerNotFoundContainer$ = () => {
-    const {contextView} = useSelector(($current$:Root)=>$current$["media"]);
     const {t} = useTranslation();
     return (
         <div className="container col-xxl-8 px-4 py-5">
             <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div className="col-10 col-sm-8 col-lg-6">
-                    <LazyLoadImage effect="blur" className="d-block mx-lg-auto img-fluid" src={$Asset$(`util/global_icon_notfound_${contextView}_cover.webp`)} />
+                    <LazyLoadImage effect="blur" className="d-block mx-lg-auto img-fluid" src={$Asset$(`util/global_icon_notfound_anime_cover.webp`)} />
                 </div>
                 <div className="col-lg-6 text-center">
                     <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">
@@ -99,13 +98,12 @@ export const $AddonListenerOptionsContainer$ = () => {
     const {contextView,search,pagination:{loader}} = useSelector(($current$:Root)=>$current$["media"]);
     const $dispatcher$ = useDispatch();
     const $searchComponent$ = () => {
-        const [current,setCurrent] = useState<string | undefined>(search);
-        useEffect(() => {
-            const $timeout$ = (setTimeout(() => $dispatcher$($Action$["$media$"]["setSearch"]((current == "") ? undefined : current)),1000));
-            return () => (clearTimeout($timeout$));
-        });
-        return (
-            <input readOnly={loader} disabled={loader} type="search" defaultValue={current} className="form-control" placeholder={t("PageListenerOptionSearchLabelText")} onChange={$event$ => setCurrent($event$["target"]["value"])}/>
+        const [current,setCurrent] = useState(search);
+        const $handler$ = ($event$:KeyboardEvent<HTMLInputElement>) => {
+            $event$["preventDefault"]();
+            ($event$["code"] == "Enter") && $dispatcher$($Action$["$media$"]["setSearch"]((current == "") ? undefined : current));
+        };return (
+            <input onChange={$event$ => setCurrent($event$["target"]["value"])} readOnly={loader} disabled={loader} type="search" defaultValue={search} className="form-control" placeholder={t("PageListenerOptionSearchLabelText")} onKeyUp={$handler$}/>
         );
     };
     return (
@@ -140,7 +138,7 @@ export const $ComponentListenerCategoryContainer$ = () => {
                 </div>
                 <div className="col text-end">
                     <button disabled={loader || filter["length"] == 0} className="btn btn-outline-secondary" onClick={() => $dispatcher$($Action$["$media$"]["setFilter"]("none"))}>
-                        Restablecer
+                        {t("ComponentListenerFilterContainerButtonResetLabelText")}
                     </button>
                 </div>
             </div>
@@ -188,13 +186,11 @@ export const $ComponentListenerCategoryContainer$ = () => {
 
 /** Componente para Mostrar el Paginador para el Listado de los Medios */
 export const $ComponentListenerPaginatorContainer$ = () => {
-    const {pagination:{currentPage,perPage,total,loader},contextView} = useSelector(($current$:Root)=>$current$["media"]);
+    const {pagination:{currentPage,total:{elements,pages,current},loader},contextView} = useSelector(($current$:Root)=>$current$["media"]);
     const {t} = useTranslation();
     const $dispatcher$ = useDispatch();
     const $icon$: CSSProperties = {position:"relative",right:"1px",top:"3px"};
-    const $pages$: number = (Math["ceil"](Math["round"](total / perPage)));
     const $context_name$: string[] = t(`ComponentListenerPaginationContext${$UpperString$(contextView)}Title`)["toLowerCase"]()["split"]("|");
-    const $total$: number = ((total < perPage) ? total : perPage);
     return (
         <div className="row text-center mt-5 d-flex">
             <div className="col">
@@ -214,14 +210,14 @@ export const $ComponentListenerPaginatorContainer$ = () => {
                         </button>
                     </li>
                     <li className="page-item">
-                        <button onClick={_ => $dispatcher$($Action$["$media$"]["mutatePagination"]({currentPage:(currentPage + 1)} as any))} disabled={loader || currentPage >= ($pages$ == 0 ? ($pages$ + 1) : $pages$)} className="page-link btn btn-outline-secondary">
+                        <button onClick={_ => $dispatcher$($Action$["$media$"]["mutatePagination"]({currentPage:(currentPage + 1)} as any))} disabled={loader || currentPage >= (pages == 0 ? (pages + 1) : pages)} className="page-link btn btn-outline-secondary">
                             <span style={$icon$} className="material-icons-outlined">
                                 chevron_right
                             </span>
                         </button>
                     </li>
                     <li className="page-item">
-                        <button onClick={_ => $dispatcher$($Action$["$media$"]["mutatePagination"]({currentPage:$pages$} as any))} disabled={loader || currentPage == ($pages$ == 0 ? ($pages$ + 1) : $pages$)} className="page-link btn btn-outline-secondary">
+                        <button onClick={_ => $dispatcher$($Action$["$media$"]["mutatePagination"]({currentPage:pages} as any))} disabled={loader || currentPage == (pages == 0 ? (pages + 1) : pages)} className="page-link btn btn-outline-secondary">
                             <span style={$icon$} className="material-icons-outlined">
                                 keyboard_double_arrow_right
                             </span>
@@ -230,9 +226,9 @@ export const $ComponentListenerPaginatorContainer$ = () => {
                 </ul>
                 <p>
                     {loader ? <$Skeleton$ count={1}/> : $SprintF$(t("ComponentListenerPaginationTextLabelText"),{
-                        total_on_view: $total$,
-                        total_elements: total,
-                        context_name: ($total$ <= 1) ? $context_name$[1] : $context_name$[0]
+                        total_on_view: (currentPage == pages) ? elements : (current * currentPage),
+                        total_elements: elements,
+                        context_name: (current <= 1) ? $context_name$[1] : $context_name$[0]
                     })}
                 </p>
             </div>

@@ -5,7 +5,7 @@
 @date 18/03/24 10:30PM
 @description Definición del Prototipo para el Contexto de la Aplicación Media del Proyecto
 */
-import Pagination from "../pagination";
+import type Pagination from "../pagination";
 
 /** Definición de los Tipos de Medios Disponibles en la Aplicación */
 export type MediaType = "anime" | "game" | "music" | "video" | "unknown";
@@ -69,5 +69,7 @@ export interface Media {
         background?: string,
         /** Contenedor con las Capturas de Pantalla del Medio */
         snapshot?: string[]
-    }
+    },
+    /** Identificador Único del Medio */
+    identified: string
 };

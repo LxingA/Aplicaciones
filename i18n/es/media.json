@@ -28,12 +28,14 @@
     "PageListenerOptionSearchLabelText": "Buscar por un título...",
     "PageListenerOptionSearchEnabledContextTextLabel": "Resultados de \"{search}\"",
     "ComponentListenerFilterContainerTitleText": "Filtro",
+    "ComponentListenerFilterContainerButtonResetLabelText": "Restablecer",
     "GraphQLErrorUnknownGlobalTitleText": "Error Desconocido",
     "GraphQLErrorUnknownGlobalButtonActionLabel": "Reintentar",
-    "ComponentListenerPaginationTextLabelText": "mostrando {total_on_view} de {total_elements} {context_name} en la vista",
+    "ComponentListenerPaginationTextLabelText": "mostrando {total_on_view} de {total_elements} {context_name} en total en la vista",
     "ComponentListenerPaginationContextAnimeTitle": "Animes|Anime",
     "ComponentListenerPaginationContextMusicTitle": "Canciones|Canción",
     "ComponentListenerPaginationContextGameTitle": "Juegos|Juego",
     "ComponentListenerPaginationContextVideoTitle": "Vídeos|Vídeo",
-    "ComponentListenerNotFoundTitleText": "Nada Encontrado"
+    "ComponentListenerNotFoundTitleText": "Nada Encontrado",
+    "PageViewSEOTitleDefault": "Visualizando {title}"
 }

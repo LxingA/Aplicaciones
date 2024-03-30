@@ -8,7 +8,7 @@
 
 /** Fetcher para la Comunicación a la API Global */
 const $Fetcher$ = async({
-    $uri$ = import.meta.env.CkAppEnvironmentAPIEndPointURI ?? process["env"]["CkAppEnvironmentAPIEndPointURI"],
+    $uri$,
     $method$ = "GET",
     $cache$ = true,
     $path$ = "/",

@@ -10,10 +10,12 @@ import {useSelector,useDispatch} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 import {useQuery} from '@apollo/client';
 import {$Star_Icon_Component$} from './index';
+import {useNavigate} from 'react-router-dom';
 import {$ComponentListenerErrorContainer$,$ComponentListenerNotFoundContainer$} from '../component/listener.web';
 import {$Action$} from '../../../util/reducer';
 import type {Root} from '../../../bin/redux';
 import type {Media as MediaPrototype,MediaType} from '../../../types/service/media';
+import type {APIResponse} from '../../../types/pagination';
 import $Asset$ from '../../../util/asset';
 import $Listener$ from "../template/listener";
 import $SprintF$,{$UpperString$} from '../../../util/sprintf';
@@ -21,9 +23,19 @@ import $GraphQLMedia$ from '../graphql/media';
 import $Skeleton$,{SkeletonTheme} from 'react-loading-skeleton';
 
 /** Definición del Componente para Mostrar el Contenedor del Medio Actual */
-const $ComponentMediaCardContainer$ = ({name,description,media,meta,rate}:MediaPrototype): JSX.Element => {
+const $ComponentMediaCardContainer$ = ({name,description,media,meta,rate,identified}:MediaPrototype): JSX.Element => {
+    const {contextView} = useSelector(($current$:Root)=>$current$["media"]);
     const $rate_current_element$: JSX.Element[] = [];
+    const $navigator$ = useNavigate();
     for(let $c = 0; $c <= ((rate ?? 1) - 1); $c++) $rate_current_element$["push"](<$Star_Icon_Component$ key={$c}/>);
+    let $studio$: string = "";switch(contextView){
+        case "anime":
+            $studio$ = "cWQQReUx";
+        break;
+        case "game":
+            $studio$ = "EQKfnDtU";
+        break;
+    };$studio$ = meta!["filter"](({id}) => (id == $studio$))[0]["item"][0]["label"];
     return (
         <div className="col mt-3">
             <div style={{height:"600px",backgroundImage:`url(${media["cover"] ? $Asset$(media["cover"]["substring"](1)) : ""})`}} className="card card-cover overflow-hidden text-bg-dark rounded-4 shadow-lg">
@@ -39,14 +51,21 @@ const $ComponentMediaCardContainer$ = ({name,description,media,meta,rate}:MediaP
                     </p>
                     <ul className="d-flex list-unstyled mt-auto">
                         <li className="me-auto">
-
+                            <button className="btn btn-outline-light p-5 rounded-circle btn-lg" onClick={$event$ => {
+                                $event$["preventDefault"]();
+                                $navigator$({pathname:"./view",search:`k=${identified}`});
+                            }}>
+                                <span style={{fontSize:"48px"}} className="material-icons-outlined">
+                                    login
+                                </span>
+                            </button>
                         </li>
                         <li className="d-flex align-items-center me-3">
                             <span className="material-icons-outlined" style={{position:"relative",right:"3px"}}>
                                 apartment
                             </span>
                             <small>
-                                {meta!["filter"](({id}) => (id == "cWQQReUx"))[0]["item"][0]["label"]}
+                                {($studio$["split"](" ")["length"] > 0) ? $studio$["split"](" ")[0] : $studio$}
                             </small>
                         </li>
                         <li className="d-flex align-items-center">
@@ -71,12 +90,12 @@ export default function Listener({context}:{
 }){
     const {t,i18n:{language}} = useTranslation();
     const {project} = useSelector(($current$:Root)=>$current$["global"]);
-    const {pagination:{perPage,currentPage},filter,search} = useSelector(($current$:Root)=>$current$["media"]);
+    const {pagination:{perPage,currentPage,loader},filter,search} = useSelector(($current$:Root)=>$current$["media"]);
     const {data,loading,error,refetch} = useQuery($GraphQLMedia$,{context:{language},initialFetchPolicy:"no-cache",variables:{search,context,paginator:{perPage,currentPage},filter:(filter["length"] == 0 ? undefined : filter)}});
     const $define_container_default_loader$: JSX.Element[] = [];
     const $dispatcher$ = useDispatch();
     useEffect(() => {
-        (data && data["media_content"]) && $dispatcher$($Action$["$media$"]["mutatePagination"]({total:(data["media_content"] as MediaPrototype[])["length"],loader:false} as any));
+        (data && data["media_content"]) && $dispatcher$($Action$["$media$"]["mutatePagination"]({total:{...(data["media_content"] as APIResponse)["total"],current:(data["media_content"]["item"] as MediaPrototype[])["length"]},loader:loading} as any));
     },[data]);
     for(let $y = 0; $y <= (perPage - 1); $y++) $define_container_default_loader$["push"](
         <SkeletonTheme baseColor="rgba(33,37,41,0.8)" highlightColor="#787d79" key={$y}>
@@ -113,7 +132,7 @@ export default function Listener({context}:{
         <$Listener$ context={context} seo={{$title$:t(`Page${$UpperString$(context)}Title`),$description$:$SprintF$(t("PageListenerHeaderDescriptionText"),{author:project["name"],context:t(`PageIndexSeeModeMediaBoxContent${$UpperString$(context)}Title`)["toLowerCase"]()}),$keywords$:t(`Page${$UpperString$(context)}Keyword`)["split"](",")}}>
             {error ? <$ComponentListenerErrorContainer$ $callback$={refetch}/> : (
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-2 align-items-stretch">
-                    {loading ? $define_container_default_loader$ : (!data["media_content"] ? <$ComponentListenerNotFoundContainer$ /> : (data["media_content"]["length"] > 0 ? (data["media_content"] as MediaPrototype[])["map"](($object$,$iterator$) => (
+                    {loading ? $define_container_default_loader$ : (!data["media_content"] ? <$ComponentListenerNotFoundContainer$ /> : (data["media_content"]["item"]["length"] > 0 ? (data["media_content"]["item"] as MediaPrototype[])["map"](($object$,$iterator$) => (
                         <$ComponentMediaCardContainer$ {...$object$} key={$iterator$}/>
                     )) : (
                         <$ComponentListenerNotFoundContainer$ />
