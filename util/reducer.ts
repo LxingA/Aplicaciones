@@ -13,6 +13,9 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 import type {MediaType,MediaObject} from '../types/service/media';
 import type Pagination from '../types/pagination';
 
+/** Referencia al Almacenamiento Local para el Acceso a las Aplicaciones Web */
+export const $Storage$ = (new Map<string,any>());
+
 /** Definición del Handler para la Petición a la API Global */
 export const $Initial$ = (createAsyncThunk("api/fetch",(async () => (await $Fetcher$({
     $uri$: import.meta.env.CkAppEnvironmentAPIEndPointURI,
@@ -57,7 +60,7 @@ export const $Global$ = (createSlice({
             $s$["dark"] = payload;
         }
     },
-    extraReducers: $Builder$($Initial$,false)
+    extraReducers: $Builder$($Initial$,false,$Storage$)
 }));
 
 /** Reducedor para la Aplicación de los Medios del Proyecto */

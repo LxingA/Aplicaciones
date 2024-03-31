@@ -12,11 +12,18 @@ import {configureStore,combineReducers,createSlice,createAsyncThunk} from '@redu
 import {ApolloClient,InMemoryCache,ApolloProvider} from '@apollo/client';
 import {Provider as Redux,useSelector} from 'react-redux';
 import {StatusBar} from 'expo-status-bar';
+import {I18nextProvider,initReactI18next} from 'react-i18next';
 import $Application$ from './media/app';
+import * as $Crypto$ from 'expo-crypto';
 import $Builder$ from '../util/initial';
+import $i18n$ from 'i18next';
 import $Fetcher$ from '../util/fetch';
+import $Package$ from './media/app.json';
 import type {Global as GlobalPrototype} from '../types/reducer';
 import type {ImageSource} from 'expo-image';
+
+/** Instanciar el Almacenamiento Local para el Ambito Nativo de la Aplicación */
+const $Storage$ = (new Map<string,any>());
 
 /** Inicialización de la Obtención de Información de una Aplicación a la API */
 const $Initial$ = (createAsyncThunk("api/fetch",(async () => (await $Fetcher$({
@@ -58,7 +65,7 @@ const $Reducer$ = {
             }
         } as GlobalPrototype),
         reducers: {},
-        extraReducers: $Builder$($Initial$,true)
+        extraReducers: $Builder$($Initial$,true,$Storage$)
     }))
 };
 
@@ -124,10 +131,28 @@ const $Default$ = () => {
     return error ? (
         <$Template$ background="red" icon={require("../public/default_error_mobile.png")} {...{message}}/>
     ) : (!ready ? (
-        <$Template$ background="white" icon={require("../public/default_loading_mobile.png")} message="Cargando la Aplicación..."/>
+        <$Template$ background="white" icon={require("../public/default_loading_mobile.png")} message="Cargando la Aplicación"/>
     ) : (
         <$Application$ />
     ));
+};
+
+/** Instancia de i18n para las Aplicaciones Móviles */
+$i18n$["use"](initReactI18next)["init"]({
+    compatibilityJSON: "v3",
+    resources: $Package$["languages"],
+    lng: "es",
+    interpolation: {
+        escapeValue: false
+    }
+});
+
+/** Función Esencial para la Generación de los Enlaces de los Recursos Firmadas */
+export const $Asset$ = async(filename:string): Promise<string> => {
+    const local = ($Storage$["get"]("ckapp-cdn-data"));
+    const access_token = local["token"]["split"]("-");
+    const encrypt: string = (await $Crypto$["digestStringAsync"]($Crypto$["CryptoDigestAlgorithm"]["SHA256"],`${access_token[0]["replace"](/\_/g,"-")}/${filename}${access_token[1]}`,{encoding:$Crypto$["CryptoEncoding"]["BASE64"]}));
+    return `${local["endpoint"]}/${filename}?token=${encrypt["replace"](/\n/,"")["replace"](/\+/,"-")["replace"](/\//,"_")["replace"](/\=/,"")}&expires=${access_token[1]}` as string;
 };
 
 /** Definición Inicializadora para la Instancia de una Aplicación Móvil del Proyecto */
@@ -135,7 +160,9 @@ export default function $Movil$(){
     return (
         <Redux store={$Store$}>
             <ApolloProvider client={$GraphQL$}>
-                <$Default$ />
+                <I18nextProvider i18n={$i18n$}>
+                    <$Default$ />
+                </I18nextProvider>
             </ApolloProvider>
         </Redux>
     )

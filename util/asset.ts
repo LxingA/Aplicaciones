@@ -5,6 +5,8 @@
 @date 05/03/24 09:20PM
 @description Definición del Punto Final para el Accesos de los Recursos de la Aplicación
 */
+import $Crypto$ from 'crypto-js';
+import {$Storage$} from './reducer';
 
 /**
  * Definición del Punto Final para el Acceso a los Recursos de la Aplicación
@@ -13,8 +15,13 @@
  * @returns Retorna en Formato HTTP Absoluto el Punto Final con el Recurso
  */
 const $Asset$ = ($file$:string,$local$:boolean=false): string => {
-    const $__initial__$: string[] = $local$ ? "|0.0.0"["split"]("|") : (((window as any)["$ck_asset_globally$"] ?? "|0.0.0") as string)["split"]("|");
-    return `${$__initial__$[0]}/${$file$}?v=${$__initial__$[1]}`;
+    const local = ($Storage$["get"]("ckapp-cdn-data"));
+    if(local["token"]){
+        const $access_token$: string = local["token"]["split"]("-");
+        const $structure_hash$: string = `${$access_token$[0]["replace"](/\_/g,"-")}/${$file$}${$access_token$[1]}`;
+        const $generate_hash$: string = ($Crypto$["algo"]["SHA256"]["create"]()["update"]($structure_hash$)["finalize"]())["toString"]($Crypto$["enc"]["Base64"]);
+        return `${local["endpoint"]}/${$file$}?token=${$generate_hash$["replace"](/\n/g,"")["replace"](/\+/g,"-")["replace"](/\//g,"_")["replace"](/\=/g,"")}&expires=${$access_token$[1]}`;
+    }else return $local$ ? `/${$file$}?v=${local["version"]}` : `${local["endpoint"]}/${$file$}?v=${local["version"]}`;
 };
 
 export default $Asset$;
