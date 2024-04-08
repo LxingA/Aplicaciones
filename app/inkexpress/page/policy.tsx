@@ -16,8 +16,8 @@ import $Social$ from '../component/social';
 
 /** Página DOM para Mostrar la Política de Compra en la Aplicación */
 const $Policy$ = () => {
-    const {t} = useTranslation();
-    const {project:{telephone,social,mail,location},name,general} = useSelector(($context$:Root)=>$context$)["global"];
+    const {t} = useTranslation("inkexpress");
+    const {project:{telephone,social,mail,location},name,general} = useSelector(($context$:Root)=>$context$["global"]);
     useEffect(() => {
         document["title"] = `${t("GlobalNavbarPageLinkPrivacyLabel")} - ${name}`;
     });
@@ -57,6 +57,9 @@ const $Policy$ = () => {
                             <span dangerouslySetInnerHTML={{
                                 __html: t("PolicyPageParagraph3ContentText")
                             }}/>
+                            <span dangerouslySetInnerHTML={{
+                                __html: t("PolicyPageParagraphNewConditionContextText")
+                            }}></span>
                         </div>
                     </div>
                     <$Social$ {...{telephone,social,email:mail}}/>

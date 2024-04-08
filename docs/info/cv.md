@@ -7,12 +7,12 @@ next: false
     const año_nacimiento = (new Date(1999,0,20)["getFullYear"]());
     const edad = (año_actual - año_nacimiento);
 </script>
-![asdasd](/b609c154-d1c3-4741-9a0b-fed56a45f9e4.webp)
+![Foto de Perfil](/b609c154-d1c3-4741-9a0b-fed56a45f9e4.webp)
 # Kevin Francisco Muñiz Herrera
 ---
-### Desarrollador Web orientado a sitios web SPA con React y Soporte Técnico orientado a las Computadoras
+### Desarrollador Web orientado a sitios web SPA con React y Soporte Técnico
 ---
-##### Actualmente tengo {{edad}} años y estoy profundizando mi conocimiento hacía el Desarrollo Web con Javascript (Typescript) mediante el FrameWork React para el Desarrollo de Aplicaciones Web con Boostrap y así como la implementación de API's mediante NodeJS con Express para usarlas para la comunicación de mis aplicaciones privadas que actualmente me encuentro desarrollando y en dónde empecé a realizar dichos estudios desde cuándo tenía 18 años en el 2017. Inclusive también administro Servidores Linux mediante SSH, ya que cuento con un servidor VPS. También estoy en aprendizaje para realizar aplicaciones móviles mediante React Native, aparte de ello también para el desarrollo de videjuegos con el lenguaje de programación C# con el Motor Gráfico Unity. Estoy dispuesto a aprender algo nuevo con que sólo me ofrezcan la oportunidad de hacerlo. Aparte cuento actualmente con un servidor de base de datos MongoDB que está orientado a noSQL y lo uso como Base de Datos principal de mis aplicaciones.
+##### Actualmente tengo {{edad}} años y estoy profundizando mi conocimiento hacía el Desarrollo Web con Javascript (Typescript) mediante el FrameWork React para el Desarrollo de Aplicaciones Web con Boostrap y así como la implementación de API's mediante NodeJS con Express para usarlas para la comunicación de mis aplicaciones privadas que actualmente me encuentro desarrollando y en dónde empecé a realizar dichos estudios desde cuándo tenía 18 años en el 2017. Inclusive también administro Servidores Linux mediante SSH, ya que cuento con un servidor VPS. También estoy en aprendizaje para realizar aplicaciones móviles mediante React Native, aparte de ello también para el desarrollo de videjuegos con el Motor Gráfico Unreal Engine 5 mediante BluePrints y posible uso del Lenguaje de Programación C++. Estoy dispuesto a aprender algo nuevo con que sólo me ofrezcan la oportunidad de hacerlo. Aparte cuento actualmente con un servidor de base de datos MongoDB que está orientado a noSQL y lo uso como Base de Datos principal de mis aplicaciones.
 [![WhatsApp](/213fc260-82dd-468c-8e83-7eda3ffbb1dc.svg)](https://link.socasf.net/celular)
 
 [![Correo Electrónico](/8faf7ed6-1cc1-4462-871a-90074bd4022e.svg)](https://link.socasf.net/correo)
@@ -311,7 +311,7 @@ Después de más de 2 años, mi ex-jefe (Luís Martin) de la empresa "NorgetArt"
 
 ## Educación
 ---
-#### **Escuela Preescolar** (Enero 2004 - Enero 2005)
+#### **Escuela Preescolar** (Agosto 2003 - Agosto 2004)
 > **Maria R. de Canavati (19EJN0044A)** - Monterrey, NL. México
 ---
 [Certificado de Graduación del Sistema Educativo Nacional (N°. Folio H1474840)](/eb565d62-6d3c-4aad-aa95-4df657628aec.pdf)

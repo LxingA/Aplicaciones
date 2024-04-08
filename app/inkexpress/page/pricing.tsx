@@ -21,7 +21,7 @@ const $ListingProductsDOM$ = ({$language$}:{
     /** Idioma Currente de la Aplicación */
     $language$: string
 }) => {
-    const {t} = useTranslation();
+    const {t} = useTranslation("inkexpress");
     const {loading,error,data,refetch} = useQuery($GraphQLCategory$,{context:{language:$language$},notifyOnNetworkStatusChange:true,fetchPolicy:"cache-and-network"});
     const $error$ = (t("GraphQLQueryErrorUnknown")["split"]("|"));
     if(error) return (
@@ -42,8 +42,8 @@ const $ListingProductsDOM$ = ({$language$}:{
 /** Página DOM para Mostrar los Productos de la Aplicación */
 const $Price$ = () => {
     const year = (new Date())["getFullYear"]();
-    const {name,project:{social,telephone,mail}} = useSelector(($context$:Root)=>$context$)["global"];
-    const {t,i18n:{language}} = useTranslation();
+    const {name,project:{social,telephone,mail}} = useSelector(($context$:Root)=>$context$["global"]);
+    const {t,i18n:{language}} = useTranslation("inkexpress");
     useEffect(() => {
         document["title"] = `${$SprintF$(t("PricePageTitleHeader"),{year})} - ${name}`;
     },[]);

@@ -15,7 +15,16 @@ Una aplicación web para el acceso a la Imprenta Express Local en Monterrey, NL.
 
 # Historial de Cambios
 Todos los cambios realizadas a la Aplicación **"Imprenta Express Monterrey"**
-## [1.3.1] - Lunes 11 de Marzo de 2024 <Badge type="tip" text="Versión Actual"/>
+
+## [1.3.2] - Domingo 07 de Abril de 2024 <Badge type="tip" text="Versión Actual"/>
+
+### Correcciones
+- Se optimizó y se corrigió unos ajustes en la aplicación
+
+### Añadidos
+- Se añadió un nuevo término en la política de envíos de la aplicación
+
+## [1.3.1] - Lunes 11 de Marzo de 2024
 
 ### Correcciones
 - Se corrigió un error que impedía obtener el **listado de los productos** en la **página de precios** de la aplicación

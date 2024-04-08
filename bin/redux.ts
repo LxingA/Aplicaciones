@@ -6,13 +6,12 @@
 @description Integración de React Redux como Manejador de Estados para las Aplicaciones
 */
 import {configureStore,combineReducers} from '@reduxjs/toolkit';
-import {$Global$,$Media$} from '../util/reducer';
+import {$Global$} from '../util/reducer';
 
 /** Definición del Almacenamiento de Estados Global para las Aplicaciones */
 const $Redux$ = (configureStore({
     reducer: combineReducers({
-        global: $Global$["reducer"],
-        media: $Media$["reducer"]
+        global: $Global$["reducer"]
     }),
     devTools: false
 }));

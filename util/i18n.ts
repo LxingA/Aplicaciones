@@ -5,24 +5,20 @@
 @date 06/03/24 08:00PM
 @description Integración de i18n para las Aplicaciones
 */
-import Language from 'i18next';
-import Resource from 'i18next-resources-to-backend';
-import type {i18n,InitOptions} from 'i18next';
+import {initReactI18next} from 'react-i18next';
+import type {InitOptions} from 'i18next';
+import Engine from 'i18next';
+import Language from '../app/language.json';
 
-/**
- * Realizar la Integración de i18n en las Aplicaciones para varios idiomas
- * @param $name$ Nombre de la Aplicación
- */
-const $Language$ = ($name$:string): i18n => {
-    Language["use"](
-        Resource((language:string) => import(`../i18n/${language}/${$name$}.json`))
-    )["init"]({
-        lng: navigator["language"]["substring"](0,2),
-        fallbackLng: "es",
-        interpolation: {
-            escapeValue: false
-        }
-    } as InitOptions);return Language;
-};
+/** Configuración Inicial de la Aplicación */
+Engine["use"](initReactI18next)["init"]({
+    resources: Language,
+    compatibilityJSON: "v3",
+    lng: "es",
+    fallbackLng: "en",
+    interpolation: {
+        escapeValue: false
+    }
+} as InitOptions);
 
-export default $Language$;
+export default Engine;

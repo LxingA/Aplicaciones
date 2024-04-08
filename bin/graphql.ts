@@ -13,29 +13,7 @@ import type GraphQLContext from '../types/context';
 
 /** Instancia del Cliente Apollo GraphQL para el Servicio */
 const $GraphQL$ = (new ApolloClient({
-    cache: (new InMemoryCache({
-        fragments: (createFragmentRegistry(gql`
-            fragment MediaContextContentEssentialData on Media {
-                name,
-                description,
-                rate,
-                meta {
-                    id,
-                    label,
-                    item {
-                        label,
-                        identified
-                    }
-                },
-                media {
-                    cover,
-                    background,
-                    snapshot
-                },
-                identified
-            }
-        `))
-    })),
+    cache: (new InMemoryCache()),
     link: concat(
         (new ApolloLink((operation,forward) => {
             operation["setContext"](({language}:GraphQLContext) => ({

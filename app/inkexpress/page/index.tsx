@@ -5,7 +5,7 @@
 @date 06/03/24 05:00PM
 @description Página Principal para la Aplicación
 */
-import {useEffect,useState} from 'react';
+import {useEffect} from 'react';
 import {Link,useLocation} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
@@ -18,7 +18,7 @@ import $Logo$ from '../component/logo';
 /** Página Principal de la Aplicación */
 const $Home$ = () => {
     const {project:{location,social,telephone,mail},name,slogan,general,option} = useSelector(($context$:Root)=>$context$["global"]);
-    const {t,i18n:{language,changeLanguage}} = useTranslation();
+    const {t,i18n:{language,changeLanguage}} = useTranslation("inkexpress");
     const {search} = useLocation();
     useEffect(() => {
         document["title"] = `${slogan} - ${name}`;

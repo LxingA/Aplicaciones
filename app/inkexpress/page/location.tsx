@@ -16,8 +16,8 @@ import $Social$ from '../component/social';
 
 /** Página para Mostrar la Ubicación de la Aplicación */
 const $Location$ = () => {
-    const {t} = useTranslation();
-    const {name,project:{social,location,telephone,mail},general} = useSelector(($context$:Root)=>$context$)["global"];
+    const {t} = useTranslation("inkexpress");
+    const {name,project:{social,location,telephone,mail},general} = useSelector(($context$:Root)=>$context$["global"]);
     const {search} = useLocation();
     useEffect(() => {
         document["title"] = `${t("LocationPageTitleHeader")} - ${name}`;

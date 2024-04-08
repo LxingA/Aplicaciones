@@ -41,7 +41,7 @@ export const $Products$ = ({$item$}:{
         image?: string
     }[],
 }) => {
-    const {t} = useTranslation();
+    const {t} = useTranslation("inkexpress");
     const $Container_Product$ = ({name,price,template}:Product) => {
         return (
             <div className="articulo">
@@ -155,7 +155,7 @@ export const $Pricing$ = ({$location$,$services$}:{
     /** Contenedor con los Servicios de Envío de la Aplicación */
     $services$: $Listing$[]
 }) => {
-    const {t} = useTranslation();
+    const {t} = useTranslation("inkexpress");
     const $Listing$ = ({$item$}:{
         /** Contenedor con la Lista de los Servicios de Envío */
         $item$: $Listing$[]
@@ -164,7 +164,9 @@ export const $Pricing$ = ({$location$,$services$}:{
             <ul>
                 {$item$["map"](({$name$,$price$},$unique$) => (
                     <li key={$unique$}><br/>
-                        {$name$} {$price$ ? `$${$price$}` : t("PolicyBoxComponentListingIsTypeFreeText")}
+                        <span>
+                            {$name$} {$price$ ? `$${$price$}` : t("PolicyBoxComponentListingIsTypeFreeText")}
+                        </span>
                     </li>
                 ))}
             </ul>
@@ -172,7 +174,7 @@ export const $Pricing$ = ({$location$,$services$}:{
     };
     return (
         <div style={{backgroundColor:"#e5e5db",padding:"25px",textAlign:"left",marginBottom:"15px"}}>
-            {t("PolicyBoxComponentListingHeaderTitle")}<br/>
+            {t("PolicyBoxComponentListingHeaderTitle")}<br/><br/>
             {$SprintF$(t("PolicyBoxComponentListingHeaderDescription"),{
                 city: $location$["city"],
                 state: $location$["state"],
@@ -193,7 +195,7 @@ export const $Schedule$ = ({$ranges$}:{
         hourRange: string
     }[]
 }) => {
-    const {t} = useTranslation();
+    const {t} = useTranslation("inkexpress");
     const $Day$: string[] = (t("GlobalTimeContextDaysLabel"))["split"](":");
     const $h$ = ($f$:string,$c$:string[]) => {
         let $__object__$: Record<string,null> = {};

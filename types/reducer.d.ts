@@ -11,8 +11,6 @@ import type Service from "./service";
 export interface Global extends Service {
     /** Definición de los Idiomas del Servicio */
     language: "es" | "en",
-    /** Establecer en Modo Obscuro el Tema del Servicio */
-    dark: boolean,
     /** Definir el Objeto para la Inicialización del Servicio */
     initial: {
         /** Estatus Actual de la Inicialización del Servicio */

@@ -17,8 +17,8 @@ const $Builder$ = ($Initial$:any,$native$:boolean,$storage$:Map<string,any>) => 
                 ($s$ as any)[$key$] = (Object["values"]($a$["payload"] as GlobalPrototype))[$iterator$];
             });if(!$native$){
                 const $__def__$ = ($a$["payload"] as GlobalPrototype)["option"]["$html$"];
+                $s$["option"]["theme"] = ($a$["payload"])["option"]["dark"] ? "dark" : "light";
                 (document["documentElement"]["setAttribute"]("version",($a$["payload"] as GlobalPrototype)["version"]));
-                (document["documentElement"]["setAttribute"]("data-bs-theme",(($a$["payload"] as GlobalPrototype)["dark"]) ? "dark" : "light"));
                 (Object["keys"]($__def__$))["forEach"](($key$,$iterator$) => {
                     (document["documentElement"]["setAttribute"]($key$,`return ${Object["values"]($__def__$)[$iterator$] ? "true" : "false"}`));
                 });
@@ -26,7 +26,8 @@ const $Builder$ = ($Initial$:any,$native$:boolean,$storage$:Map<string,any>) => 
                 endpoint: $a$["payload"]["endpoint"]["asset"],
                 token: $a$["payload"]["token"],
                 version: $a$["payload"]["version"]
-            });$s$["initial"] = {ready:true,error:false};
+            });$storage$["set"]("ckapp-cdn-token",{});
+            $s$["initial"] = {ready:true,error:false};
         };
     }),
     $b$["addCase"]($Initial$["pending"],($s$) => {
