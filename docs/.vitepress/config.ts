@@ -109,7 +109,12 @@ export default async() => {
                     text: "Videojuegos",
                     items: [
                         {
-                            text: "Próximamente"
+                            text: "Noido of Legends",
+                            link: "/game/nl"
+                        },
+                        {
+                            text: "Noido White",
+                            link: "/game/nw"
                         }
                     ]
                 }

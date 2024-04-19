@@ -13,7 +13,7 @@
   "scripts": {
     "web:dev": "vite",
     "web:build": "vite build",
-    "doc:dev": "vitepress dev docs",
+    "doc:dev": "vitepress dev docs --port 4216",
     "doc:build": "vitepress build docs",
     "mobile": "expo start --port 4300"
   },
